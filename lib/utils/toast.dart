@@ -14,7 +14,7 @@ void showToast(String? message) {
         fontSize: CustomScreenUtil().setSp(regularFont()),
         gravity: ToastGravity.BOTTOM,
         timeInSecForIosWeb: 1,
-        backgroundColor: COLORS.toast_background_color,
+        backgroundColor: AppColors.toastBackgroundColor,
         textColor: Colors.white);
   }
 }

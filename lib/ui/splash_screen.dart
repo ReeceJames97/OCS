@@ -17,7 +17,7 @@ class SplashScreen extends StatelessWidget {
             fit: StackFit.expand,
             children: [
               Container(
-                color: COLORS.standard_button_color,
+                color: AppColors.standardBtnColor,
                 padding: const EdgeInsets.all(10),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,

@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
 
   Widget buildBodyWidget() {
     return Container(
-      color: COLORS.bg_color,
+      color: AppColors.backgroundColor,
       child: Column(
         children: [
           Obx(() => keyboardController.isKeyboardVisible.isTrue
@@ -52,7 +52,7 @@ class _LoginPageState extends State<LoginPage> {
                   height: controller.screenHeight / 2.8,
                   width: controller.screenWidth,
                   decoration: const BoxDecoration(
-                    color: COLORS.standard_button_color,
+                    color: AppColors.standardBtnColor,
                     borderRadius: BorderRadius.only(
                       bottomRight: Radius.circular(80),
                     ),
@@ -76,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
 
 
                         Text(
-                              STRINGS.welcome_back_pls_login,
+                              AppStrings.welcomeBackPlsLogin,
                               style: TextStyle(
                                   fontSize: CustomScreenUtil().setSp(35),
                                   color: Colors.white,
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
                 children: [
                   ///Login Text
                   Text(
-                    STRINGS.login,
+                    AppStrings.login,
                     style: TextStyle(
                         fontSize: CustomScreenUtil().setSp(50),
                         fontFamily: "NexaBold"),
@@ -119,9 +119,9 @@ class _LoginPageState extends State<LoginPage> {
                         controller: controller.userIdController,
                         decoration: InputDecoration(
                             isDense: true,
-                            labelText: STRINGS.user_name,
+                            labelText: AppStrings.userName,
                             labelStyle: TextStyle(
-                                color: COLORS.standard_button_color,
+                                color: AppColors.standardBtnColor,
                                 fontSize: CustomScreenUtil().setSp(bigFont())),
                             fillColor: Colors.white70,
                             contentPadding:
@@ -139,12 +139,12 @@ class _LoginPageState extends State<LoginPage> {
                               borderRadius:
                                   BorderRadius.all(Radius.circular(20.0)),
                               borderSide: BorderSide(
-                                  color: COLORS.standard_button_color),
+                                  color: AppColors.standardBtnColor),
                             ),
                             filled: true,
                             floatingLabelBehavior: FloatingLabelBehavior.auto,
                             prefixIcon: const Icon(Icons.person,
-                                color: COLORS.standard_button_color)),
+                                color: AppColors.standardBtnColor)),
                         style:
                             TextStyle(fontSize: CustomScreenUtil().setSp(32))),
                   ),
@@ -164,9 +164,9 @@ class _LoginPageState extends State<LoginPage> {
                             obscureText: !(controller.isPasswordVisible.value),
                             decoration: InputDecoration(
                                 isDense: true,
-                                labelText: STRINGS.password,
+                                labelText: AppStrings.password,
                                 labelStyle: TextStyle(
-                                    color: COLORS.standard_button_color,
+                                    color: AppColors.standardBtnColor,
                                     fontSize:
                                         CustomScreenUtil().setSp(bigFont())),
                                 fillColor: Colors.white70,
@@ -185,19 +185,19 @@ class _LoginPageState extends State<LoginPage> {
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(25.0)),
                                   borderSide: BorderSide(
-                                      color: COLORS.standard_button_color),
+                                      color: AppColors.standardBtnColor),
                                 ),
                                 filled: true,
                                 floatingLabelBehavior:
                                     FloatingLabelBehavior.auto,
                                 prefixIcon: Icon(MdiIcons.key,
-                                    color: COLORS.standard_button_color),
+                                    color: AppColors.standardBtnColor),
                                 suffixIcon: IconButton(
                                   icon: Icon(
                                       controller.isPasswordVisible.value
                                           ? Icons.visibility
                                           : Icons.visibility_off,
-                                      color: COLORS.standard_button_color),
+                                      color: AppColors.standardBtnColor),
                                   onPressed: () {
                                     controller.updatePasswordVisible();
                                   },
@@ -216,10 +216,10 @@ class _LoginPageState extends State<LoginPage> {
                     children: <Widget>[
                       InkWell(
                         onTap: () {
-                          showToast(STRINGS.forgot_password);
+                          showToast(AppStrings.forgotPassword);
                         },
                         child: Text(
-                          STRINGS.forgot_password,
+                          AppStrings.forgotPassword,
                           style: TextStyle(
                               fontSize:
                                   CustomScreenUtil().setWidth(regularFont()),
@@ -240,14 +240,14 @@ class _LoginPageState extends State<LoginPage> {
                       contentPadding: EdgeInsets.zero,
                       horizontalTitleGap: 0.0,
                       child: CheckboxListTile(
-                        activeColor: COLORS.standard_button_color,
+                        activeColor: AppColors.standardBtnColor,
                         visualDensity: const VisualDensity(
                             horizontal: -1.0, vertical: -4.0),
                         title: Text(
-                          STRINGS.remember_me,
+                          AppStrings.rememberMe,
                           style: TextStyle(
                               fontSize: ScreenUtil().setSp(28),
-                              color: COLORS.standard_button_color,
+                              color: AppColors.standardBtnColor,
                               fontWeight: FontWeight.bold),
                         ),
                         value: controller.isRememberMe.value,
@@ -263,7 +263,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
 
                   ///Login btn
-                  customStandardBtn(STRINGS.login,
+                  customStandardBtn(AppStrings.login,
                       callBack: controller.onTapLoginBtn),
 
                   SizedBox(
@@ -273,7 +273,7 @@ class _LoginPageState extends State<LoginPage> {
                   /// Don't have an account text
                   RichText(
                       text: TextSpan(
-                          text: STRINGS.do_not_have_an_acc,
+                          text: AppStrings.doNotHaveAnAccount,
                           style: TextStyle(
                               fontSize:
                                   CustomScreenUtil().setWidth(regularFont()),
@@ -287,7 +287,7 @@ class _LoginPageState extends State<LoginPage> {
                             ..onTap = () {
                               controller.onTapCreateText();
                             },
-                          text: "  ${STRINGS.create}",
+                          text: "  ${AppStrings.create}",
                           style: TextStyle(
                               fontSize:
                                   CustomScreenUtil().setWidth(bigFont()),

@@ -11,12 +11,12 @@ MaterialButton customStandardBtn(String text,
           borderRadius: BorderRadius.circular(15.0),
           side: BorderSide(
               color: isEnable
-                  ? buttonColor ?? COLORS.standard_button_color
+                  ? buttonColor ?? AppColors.standardBtnColor
                   : Colors.grey)),
       minWidth: double.infinity,
       height: CustomScreenUtil().setWidth(85),
-      color: buttonColor ?? COLORS.standard_button_color,
-      disabledColor: COLORS.button_disable_color,
+      color: buttonColor ?? AppColors.standardBtnColor,
+      disabledColor: AppColors.btnDisableColor,
       onPressed: isEnable
           ? () {
               if (callBack != null) {

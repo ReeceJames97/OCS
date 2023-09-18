@@ -1,8 +1,4 @@
-import 'dart:io';
-
 import 'package:connectivity_plus/connectivity_plus.dart';
-import 'package:flutter/foundation.dart';
-import 'log_utils.dart';
 
 Future<bool> isNetworkAvailable() async {
   var connectivityResult = await (Connectivity().checkConnectivity());
@@ -12,11 +8,9 @@ Future<bool> isNetworkAvailable() async {
     return true;
   }
   return false;
-
 }
 
 Future<bool> isNetworkConnected() async {
-
   return true;
 
   // if(kIsWeb){

@@ -1,6 +1,5 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/keyboard_controller.dart';
@@ -27,18 +26,18 @@ class MyApp extends StatelessWidget {
         minTextAdapt: true,
         splitScreenMode: true,
         useInheritedMediaQuery: true,
-        builder: (BuildContext context, Widget? child){
-          return  GetMaterialApp(
+        builder: (BuildContext context, Widget? child) {
+          return GetMaterialApp(
             debugShowCheckedModeBanner: false,
             defaultTransition: Transition.fadeIn,
-            title: STRINGS.app_name,
+            title: AppStrings.appName,
             theme: ThemeData(
               platform: TargetPlatform.iOS,
-              primaryColor: COLORS.standard_button_color,
+              primaryColor: AppColors.standardBtnColor,
               iconTheme: const IconThemeData(color: Colors.white),
             ),
-              // home: const KeyboardVisibilityProvider(child: SplashScreen())
-              home: const SplashScreen(),
+            // home: const KeyboardVisibilityProvider(child: SplashScreen())
+            home: const SplashScreen(),
           );
         });
   }

@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
       init: HomeScreenController(),
         builder: (controller) => keyboardDismissView(child: Scaffold(
           key: controller.scaffoldKey,
-          appBar: getAppbar(STRINGS.home),
+          appBar: getAppbar(AppStrings.home),
           resizeToAvoidBottomInset: true,
           body: const Center(
             child: Text("Home"),

@@ -1,18 +1,29 @@
 import 'dart:math';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart' as screenUtil;
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
 
 class CustomScreenUtil {
   bool isTablet = false;
 
   bool isLandSpace = false;
-  double screenWidth = screenUtil.ScreenUtil().screenWidth;
-  double screenHeight = screenUtil.ScreenUtil().screenHeight;
+  double screenWidth = ScreenUtil().screenWidth;
+  double screenHeight = ScreenUtil().screenHeight;
 
   CustomScreenUtil() {
-    final Size screenSize =
-        MediaQueryData.fromWindow(WidgetsBinding.instance.window).size;
+    // double ratio = WidgetsBinding.instance.window.physicalSize.width / WidgetsBinding.instance.window.physicalSize.height;
+    // double ratio = screenUtil.ScreenUtil().screenWidth / screenUtil.ScreenUtil().scaleHeight;
+    // if( (ratio >= 0.74) || (ratio < 1.5) ) {
+    //   isTablet = true;
+    //   logD("Tablet");
+    // } else{
+    //   isTablet = false;
+    //   logD("NOT Tablet");
+    // }
+
+    // final Size screenSize =
+    //     MediaQueryData.fromView(WidgetsBinding.instance.window).size;
+    final Size screenSize = MediaQuery.of(Get.context!).size;
 
     // Calculate the diagonal size of the screen
     final double diagonalSize = sqrt(
@@ -21,20 +32,27 @@ class CustomScreenUtil {
     );
 
     // Determine if the diagonal size exceeds a certain threshold (e.g., 7 inches)
+    //logD("Sized Tablet=  "+ diagonalSize.toString());
     if (diagonalSize >= 1100.0) {
       isTablet = true;
+      // logD("Tablet");
     } else {
-      /// Check Portrait or landSpace
-      final Orientation currentOrientation =
-          WidgetsBinding.instance.window.physicalSize.width >
-                  WidgetsBinding.instance.window.physicalSize.height
-              ? Orientation.landscape
-              : Orientation.portrait;
+      /// Check Portaint or landSpace
+      // final Orientation currentOrientation =
+      //     WidgetsBinding.instance.window.physicalSize.width >
+      //             WidgetsBinding.instance.window.physicalSize.height
+      //         ? Orientation.landscape
+      //         : Orientation.portrait;
+      final Orientation currentOrientation = MediaQuery.of(Get.context!).orientation;
       if (currentOrientation == Orientation.landscape) {
         isLandSpace = true;
+        // logD("LandSpace");
       } else {
         isLandSpace = false;
+        // logD("NOT LandSpace");
       }
+
+      // logD("NOT Tablet");
     }
   }
 
@@ -43,9 +61,9 @@ class CustomScreenUtil {
       return width * 1.0;
     } else {
       if (isLandSpace) {
-        return screenUtil.ScreenUtil().setWidth(width / 2);
+        return ScreenUtil().setWidth(width / 2);
       } else {
-        return screenUtil.ScreenUtil().setWidth(width);
+        return ScreenUtil().setWidth(width);
       }
     }
   }
@@ -55,9 +73,9 @@ class CustomScreenUtil {
       return sp * 1.0;
     } else {
       if (isLandSpace) {
-        return screenUtil.ScreenUtil().setSp(sp);
+        return ScreenUtil().setSp(sp);
       } else {
-        return screenUtil.ScreenUtil().setSp(sp);
+        return ScreenUtil().setSp(sp);
       }
     }
   }
@@ -67,9 +85,9 @@ class CustomScreenUtil {
       return height * 1.0;
     } else {
       if (isLandSpace) {
-        return screenUtil.ScreenUtil().setHeight(height * 1.2);
+        return ScreenUtil().setHeight(height * 1.2);
       } else {
-        return screenUtil.ScreenUtil().setHeight(height);
+        return ScreenUtil().setHeight(height);
       }
     }
   }

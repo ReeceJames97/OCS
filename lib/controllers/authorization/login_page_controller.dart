@@ -1,17 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_keyboard_visibility/flutter_keyboard_visibility.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/ui/authorization/sign_up_page.dart';
 import 'package:kf_ocs/ui/home_screen.dart';
 import 'package:kf_ocs/utils/constants.dart';
-import 'package:kf_ocs/utils/log_utils.dart';
+import 'package:kf_ocs/utils/strings.dart';
 import 'package:kf_ocs/utils/toast.dart';
 import 'package:kf_ocs/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPageController extends GetxController {
-
   final scaffoldKey = GlobalKey<ScaffoldState>();
   final userIdController = TextEditingController();
   final passwordController = TextEditingController();
@@ -49,9 +47,9 @@ class LoginPageController extends GetxController {
     String password = passwordController.text.trim().toString();
 
     if (!isNotNullEmptyString(userName)) {
-      showToast("Username is empty!");
+      showToast(AppStrings.userNameIsEmpty);
     } else if (!isNotNullEmptyString(password)) {
-      showToast("Password is empty!");
+      showToast(AppStrings.passwordIsEmpty);
     } else {
       try {
         await login(userName, password);
@@ -62,14 +60,14 @@ class LoginPageController extends GetxController {
   }
 
   /// Update isRememberMe
-  void updateRememberMe(bool? newValue){
-    isRememberMe = (newValue??false).obs;
+  void updateRememberMe(bool? newValue) {
+    isRememberMe = (newValue ?? false).obs;
     update();
   }
 
   Future<void> login(String userName, String password) async {
     QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection("Employee")
+        .collection(AppStrings.employee)
         .where('name', isEqualTo: 'james')
         .get();
 
@@ -80,11 +78,11 @@ class LoginPageController extends GetxController {
 
     if (password == snapshot.docs[0]['password']) {
       prefs = await SharedPreferences.getInstance();
-      prefs?.setString(Constants.USER_NAME, userName);
+      prefs?.setString(Constants.USERNAME, userName);
       prefs?.setString(Constants.PASSWORD, password);
       Get.off(() => const HomeScreen());
     } else {
-      showToast("Password is not correct!");
+      showToast(AppStrings.passwordIsNotCorrect);
     }
   }
 
@@ -93,7 +91,7 @@ class LoginPageController extends GetxController {
     if (error.toString().toLowerCase() ==
         "rangeerror (index): invalid value: valid value range is empty: 0"
             .toLowerCase()) {
-      errorMessage = "Employee does not exist!";
+      errorMessage = AppStrings.employeeDoesNotExist;
     }
     showToast(errorMessage);
   }
@@ -104,8 +102,7 @@ class LoginPageController extends GetxController {
     update();
   }
 
-  void onTapCreateText(){
+  void onTapCreateText() {
     Get.off(() => const SignUpPage());
   }
-
 }

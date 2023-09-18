@@ -19,7 +19,7 @@ void showSnackBar(String? message, {String? title}) {
       ),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
-      backgroundColor: COLORS.snackbar_background_color,
+      backgroundColor: AppColors.snackBarBgColor,
       padding: const EdgeInsets.fromLTRB(10, 0, 10, 15),
       duration: const Duration(seconds: 2),
       isDismissible: true,
