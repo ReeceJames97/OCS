@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kf_ocs/utils/colors.dart';
+import 'package:kf_ocs/utils/app_colors.dart';
 
 AppBar getAppbar(String title,
     {List<Widget>? actionWidget, Color? appBarColor}) {

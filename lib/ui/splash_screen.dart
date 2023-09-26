@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/splash_screen_controller.dart';
-import 'package:kf_ocs/utils/colors.dart';
+import 'package:kf_ocs/utils/app_colors.dart';
 import 'package:lottie/lottie.dart';
 
 class SplashScreen extends StatelessWidget {

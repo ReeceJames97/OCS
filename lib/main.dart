@@ -4,9 +4,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/keyboard_controller.dart';
 import 'package:kf_ocs/ui/splash_screen.dart';
-import 'package:kf_ocs/utils/colors.dart';
+import 'package:kf_ocs/utils/app_colors.dart';
+import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/screen_unit.dart';
-import 'package:kf_ocs/utils/strings.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

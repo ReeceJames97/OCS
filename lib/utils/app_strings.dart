@@ -7,8 +7,8 @@ class AppStrings {
   static const String home = "Home";
   static const String forgotPassword = "Forgot Password?";
   static const String rememberMe = "Remember me";
-  static const String doNotHaveAnAccount = "Don't have an account?";
-  static const String alreadyHaveAnAccount = "Already have an account?";
+  static const String doNotHaveAnAccount = "Don't have an account? ";
+  static const String alreadyHaveAnAccount = "Already have an account? ";
   static const String create = "Create";
   static const String hello = "Hello!";
   static const String welcomeBackPlsLogin = "Welcome Back!, Please Login";
@@ -19,4 +19,14 @@ class AppStrings {
   static const String employee = "Employee";
   static const String userNameIsEmpty = "Username is empty!";
   static const String passwordIsEmpty = "Password is empty!";
+  static const String or = "Or";
+  static const String loginUsing = "Login using";
+  static const String signUpUsing = "Signup using";
+  static const String logout = "Logout";
+  static const String edit = "Edit";
+  static const String yes = "Yes";
+  static const String no = "No";
+  static const String confirm = "Confirm";
+  static const String areYouSureYouWantToDoThis = "Are you sure you want to do this?";
+  static const String loading = "Loading....";
 }

@@ -10,3 +10,7 @@ int bigFont(){
   return 30;
 }
 
+int biggerFont(){
+  return 32;
+}
+

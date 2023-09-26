@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:kf_ocs/utils/colors.dart';
+import 'package:kf_ocs/utils/app_colors.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
 import 'package:kf_ocs/utils/fontutils.dart';
 import 'package:kf_ocs/utils/utils.dart';
