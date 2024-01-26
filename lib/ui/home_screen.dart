@@ -3,6 +3,7 @@ import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/home_screen_controller.dart';
+import 'package:kf_ocs/ui/today_screen.dart';
 import 'package:kf_ocs/utils/app_colors.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
@@ -23,9 +24,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return GetBuilder<HomeScreenController>(
         init: HomeScreenController(),
-
         builder: (_) => AdvancedDrawer(
-          disabledGestures: false,
+            disabledGestures: false,
             controller: controller.advancedDrawer,
             backdropColor: AppColors.standardBtnColor,
             animationCurve: Curves.bounceInOut,
@@ -38,65 +38,66 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   children: [
                     Container(
-                        margin: const EdgeInsets.only(top: 30),
+                        // margin: const EdgeInsets.only(top: 10),
                         padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
                         alignment: Alignment.center,
                         height: 170,
                         child: Column(children: [
+                          ///Photo
                           Expanded(
-                            flex: 2,
-                            child: CircleAvatar(
-                              maxRadius: 40,
-                              backgroundColor: AppColors.standardBtnColor,
-                              child: SvgPicture.asset(
-                                'assets/images/profile.svg',
-                                width: 80,
-                                height: 80,
-                              ),
-                            ),
+                            flex: 4,
+                            child: (controller.photoUrl.isNotEmpty)
+                                ? CircleAvatar(
+                                    backgroundColor: AppColors.appBarColor,
+                                    radius: 37,
+                                    child: CircleAvatar(
+                                        maxRadius: 35,
+                                        backgroundImage:
+                                            NetworkImage(controller.photoUrl)),
+                                  )
+                                : CircleAvatar(
+                                    backgroundColor: AppColors.appBarColor,
+                                    radius: 37,
+                                    child: CircleAvatar(
+                                      maxRadius: 35,
+                                      backgroundColor:
+                                          AppColors.standardBtnColor,
+                                      child: SvgPicture.asset(
+                                        'assets/images/profile.svg',
+                                        width: 80,
+                                        height: 80,
+                                      ),
+                                    ),
+                                  ),
                           ),
 
+                          ///Email
+                          (controller.userMail.isNotEmpty)
+                              ? Expanded(
+                                  flex: 1,
+                                  child: Text(
+                                    controller.userMail.toString(),
+                                    style: TextStyle(
+                                        fontSize: CustomScreenUtil()
+                                            .setSp(regularFont()),
+                                        color: AppColors.backgroundColor,
+                                        fontWeight: FontWeight.bold
+                                        // fontFamily: "NexaBold"
+                                        ),
+                                  ),
+                                )
+                              : Text(
+                                  AppStrings.email,
+                                  style: TextStyle(
+                                      fontSize: CustomScreenUtil()
+                                          .setSp(regularFont()),
+                                      color: AppColors.backgroundColor,
+                                      fontWeight: FontWeight.bold
+                                      // fontFamily: "NexaBold"
+                                      ),
+                                ),
                           SizedBox(
                             height: CustomScreenUtil().setHeight(10),
-                          ),
-
-                          Expanded(
-                            flex: 1,
-                            child: Text(
-                              AppStrings.hello,
-                              style: TextStyle(
-                                  fontSize:
-                                      CustomScreenUtil().setSp(regularFont()),
-                                  color: AppColors.backgroundColor,
-                                  fontWeight: FontWeight.bold
-                                  // fontFamily: "NexaBold"
-                                  ),
-                            ),
-                          ),
-
-                          ///Edit btn
-                          Expanded(
-                            flex: 1,
-                            child: TextButton.icon(
-                              onPressed: () {
-                                // showConfirmDialog(confirmCallBack);
-                              },
-                              icon: const Icon(
-                                Icons.edit,
-                                size: 22.0,
-                                color: AppColors.backgroundColor,
-                              ),
-                              label: Text(
-                                AppStrings.edit,
-                                style: TextStyle(
-                                    color: AppColors.backgroundColor,
-                                    fontSize: CustomScreenUtil().setSp(26)),
-                              ),
-                            ),
-                          ),
-
-                          SizedBox(
-                            height: CustomScreenUtil().setHeight(20),
                           ),
                         ])),
                     const Divider(
@@ -107,7 +108,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       endIndent: 10.0,
                     ),
                     ListTile(
-                      onTap: () {},
+                      onTap: () {
+                        Get.off(() => const TodayScreen());
+                      },
                       leading: const Icon(Icons.home),
                       title: const Text('Home'),
                     ),
@@ -139,7 +142,8 @@ class _HomeScreenState extends State<HomeScreen> {
                       child: TextButton.icon(
                         // <-- TextButton
                         onPressed: () {
-                          showConfirmDialog(controller.confirmCallBack);
+                          // showConfirmDialog(AuthController.instance.confirmLogout() as Function);
+                          showConfirmDialog(controller.confirmLogout);
                         },
                         icon: const Icon(
                           Icons.logout,

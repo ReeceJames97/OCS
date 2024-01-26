@@ -1,9 +1,6 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
-import 'package:kf_ocs/ui/authorization/login_page.dart';
-import 'package:kf_ocs/ui/home_screen.dart';
-import 'package:kf_ocs/utils/constants.dart';
-import 'package:kf_ocs/utils/share_preference_utils.dart';
-import 'package:kf_ocs/utils/utils.dart';
+import 'package:kf_ocs/controllers/authorization/auth_controller.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreenController extends GetxController
@@ -18,22 +15,14 @@ class SplashScreenController extends GetxController
   }
 
   Future<void> initialization() async {
-    prefs = await SharedPreferences.getInstance();
-    String userName =
-        SharePreferenceUtils().getString(prefs?.getString(Constants.USERNAME));
-    if (isNotNullEmptyString(userName)) {
-      userAvailable = true;
-      update();
-    } else {
-      userAvailable = false;
-      update();
-    }
+    // Wait for a few seconds to display the splash screen
+    await Future.delayed(const Duration(seconds: 3));
 
-    await Future.delayed(const Duration(seconds: 3), () {
-      // Get.off(() => userAvailable! ? const HomeScreen() : const LoginPage());
-      // Get.off(() => const LoginPage());
-      Get.off(() => const HomeScreen());
-    });
+    // Initialize Firebase or perform any other initializations here
+    await Firebase.initializeApp();
+
+    // Firebase is initialized, let the AuthController handle navigation
+    final authController = AuthController.instance;
+    authController.checkAuthenticationStatus();
   }
-
 }

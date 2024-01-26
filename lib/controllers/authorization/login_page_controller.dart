@@ -1,21 +1,22 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kf_ocs/controllers/authorization/auth_controller.dart';
 import 'package:kf_ocs/ui/authorization/sign_up_page.dart';
-import 'package:kf_ocs/ui/home_screen.dart';
-import 'package:kf_ocs/utils/constants.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
+import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/toast.dart';
 import 'package:kf_ocs/utils/utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../../main_navigator.dart';
+
 class LoginPageController extends GetxController {
   final scaffoldKey = GlobalKey<ScaffoldState>();
-  final userIdController = TextEditingController();
-  final passwordController = TextEditingController();
-  final emailController = TextEditingController();
+  final txtUserIdController = TextEditingController();
+  final txtPasswordController = TextEditingController();
+  final txtEmailController = TextEditingController();
   double screenHeight = 0;
   double screenWidth = 0;
   RxBool isRememberMe = false.obs;
@@ -33,9 +34,9 @@ class LoginPageController extends GetxController {
   @override
   void dispose() {
     super.dispose();
-    userIdController.dispose();
-    passwordController.dispose();
-    emailController.dispose();
+    txtUserIdController.dispose();
+    txtPasswordController.dispose();
+    txtEmailController.dispose();
   }
 
   void initialization() {
@@ -46,21 +47,40 @@ class LoginPageController extends GetxController {
   }
 
   Future<void> onTapLoginBtn() async {
-    FocusScope.of(Get.context!).unfocus();
-    String userName = userIdController.text.trim();
-    String password = passwordController.text.trim().toString();
+    String email = getEmptyString(txtEmailController.text.trim().toString());
+    String password =
+        getEmptyString(txtPasswordController.text.trim().toString());
 
-    if (!isNotNullEmptyString(userName)) {
-      showToast(AppStrings.userNameIsEmpty);
-    } else if (!isNotNullEmptyString(password)) {
-      showToast(AppStrings.passwordIsEmpty);
-    } else {
-      try {
-        await login(userName, password);
-      } catch (e) {
-        handleLoginError(e);
+    if (isNotNullEmptyString(email) && isNotNullEmptyString(password)) {
+      showLoadingDialog();
+      bool loginResult = await AuthController.instance.login(email, password);
+
+      if (loginResult) {
+        hideDialog();
+        showToast(AppStrings.loginSuccessfully);
+        Get.off(() => const MainNavigator());
+      } else {
+        hideDialog();
+        showToast(AppStrings.loginFailed);
       }
+    } else {
+      showToast(AppStrings.plsEnterEmailAndPassword);
     }
+    // FocusScope.of(Get.context!).unfocus();
+    // String userName = txtUserIdController.text.trim();
+    // String password = txtPasswordController.text.trim().toString();
+    //
+    // if (!isNotNullEmptyString(userName)) {
+    //   showToast(AppStrings.userNameIsEmpty);
+    // } else if (!isNotNullEmptyString(password)) {
+    //   showToast(AppStrings.passwordIsEmpty);
+    // } else {
+    //   try {
+    //     await login(userName, password);
+    //   } catch (e) {
+    //     handleLoginError(e);
+    //   }
+    // }
   }
 
   /// Update isRememberMe
@@ -69,26 +89,26 @@ class LoginPageController extends GetxController {
     update();
   }
 
-  Future<void> login(String userName, String password) async {
-    QuerySnapshot snapshot = await FirebaseFirestore.instance
-        .collection(AppStrings.employee)
-        .where('name', isEqualTo: 'james')
-        .get();
-
-    if (snapshot.docs.isEmpty) {
-      showToast("Employee does not exist!");
-      return;
-    }
-
-    if (password == snapshot.docs[0]['password']) {
-      prefs = await SharedPreferences.getInstance();
-      prefs?.setString(Constants.USERNAME, userName);
-      prefs?.setString(Constants.PASSWORD, password);
-      Get.off(() => const HomeScreen());
-    } else {
-      showToast(AppStrings.passwordIsNotCorrect);
-    }
-  }
+  // Future<void> login(String userName, String password) async {
+  // QuerySnapshot snapshot = await FirebaseFirestore.instance
+  //     .collection(AppStrings.employee)
+  //     .where('name', isEqualTo: 'james')
+  //     .get();
+  //
+  // if (snapshot.docs.isEmpty) {
+  //   showToast("Employee does not exist!");
+  //   return;
+  // }
+  //
+  // if (password == snapshot.docs[0]['password']) {
+  //   prefs = await SharedPreferences.getInstance();
+  //   prefs?.setString(Constants.USERNAME, userName);
+  //   prefs?.setString(Constants.PASSWORD, password);
+  //   Get.off(() => const HomeScreen());
+  // } else {
+  //   showToast(AppStrings.passwordIsNotCorrect);
+  // }
+  // }
 
   void handleLoginError(dynamic error) {
     String errorMessage = "Error occurred!";
@@ -112,9 +132,12 @@ class LoginPageController extends GetxController {
 
   Future<void> loginWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      showLoadingDialog();
+
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
+          await googleSignInAccount!.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -130,15 +153,14 @@ class LoginPageController extends GetxController {
       final User? currentUser = _auth.currentUser;
       assert(user?.uid == currentUser?.uid);
 
-      Get.to(() => const HomeScreen());
+      hideDialog();
+      Get.off(() => const MainNavigator());
+      update();
     } catch (e) {
+      hideDialog();
       // Handle and display the error
       showToast("Error during Google sign-in: $e");
+      update();
     }
   }
-
-
 }
-
-
-

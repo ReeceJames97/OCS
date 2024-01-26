@@ -43,33 +43,56 @@ void showConfirmDialog(Function confirmCallBack) {
 }
 
 Future<void> showLoadingDialog() async {
-  Get.dialog(
-    barrierDismissible: false,
-    Dialog(
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(20.0),
-      ),
-      backgroundColor: AppColors.backgroundColor,
-      child: Container(
-          padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
-          width: CustomScreenUtil().setWidth(150),
-          height: CustomScreenUtil().setHeight(130),
-          child: Center(
-            child: LoadingAnimationWidget.staggeredDotsWave(
-              color: AppColors.standardBtnColor,
-              size: 50,
-            ),
-          ),
-        ),
 
+  mDialog = Dialog(
+    shape: RoundedRectangleBorder(
+      borderRadius: BorderRadius.circular(20.0),
+    ),
+    backgroundColor: AppColors.backgroundColor,
+    child: Container(
+      padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+      width: CustomScreenUtil().setWidth(150),
+      height: CustomScreenUtil().setHeight(130),
+      child: Center(
+        child: LoadingAnimationWidget.staggeredDotsWave(
+          color: AppColors.standardBtnColor,
+          size: 50,
+        ),
+      ),
     ),
   );
+
+  Get.dialog(
+    mDialog!,
+    barrierDismissible: false,
+  );
+  // Get.dialog(
+  //   barrierDismissible: false,
+  //   mDialog = Dialog(
+  //     shape: RoundedRectangleBorder(
+  //       borderRadius: BorderRadius.circular(20.0),
+  //     ),
+  //     backgroundColor: AppColors.backgroundColor,
+  //     child: Container(
+  //         padding: const EdgeInsets.fromLTRB(20, 5, 20, 5),
+  //         width: CustomScreenUtil().setWidth(150),
+  //         height: CustomScreenUtil().setHeight(130),
+  //         child: Center(
+  //           child: LoadingAnimationWidget.staggeredDotsWave(
+  //             color: AppColors.standardBtnColor,
+  //             size: 50,
+  //           ),
+  //         ),
+  //       ),
+  //
+  //   ),
+  // );
 }
 
 void hideDialog() {
   if (mDialog != null) {
     mDialog = null;
-    Get.back();
+    Get.back(closeOverlays: true);
   }
 
 }

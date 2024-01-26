@@ -29,4 +29,12 @@ class AppStrings {
   static const String confirm = "Confirm";
   static const String areYouSureYouWantToDoThis = "Are you sure you want to do this?";
   static const String loading = "Loading....";
+  static const String name = "Name";
+  static const String email = "Email";
+  static const String accCreationFailed = "Account creation failed!";
+  static const String plsEnterEmailAndPassword = "Please enter email and password!";
+  static const String loginFailed = "Login failed!";
+  static const String loginSuccessfully = "Login successfully!";
+  static const String accCreatedSuccessfully = "Account created successfully!";
+  static const String today = "Today";
 }

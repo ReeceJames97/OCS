@@ -2,14 +2,20 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+import 'package:kf_ocs/controllers/authorization/auth_controller.dart';
 import 'package:kf_ocs/ui/authorization/login_page.dart';
-import 'package:kf_ocs/ui/home_screen.dart';
+import 'package:kf_ocs/utils/app_strings.dart';
+import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/toast.dart';
+import 'package:kf_ocs/utils/utils.dart';
 
-class SignUpPageController extends GetxController{
-  final scaffoldKey = GlobalKey<ScaffoldState>();
-  final userIdController =  TextEditingController();
-  final passwordController =  TextEditingController();
+import '../../main_navigator.dart';
+
+class SignUpPageController extends GetxController {
+  final key = GlobalKey<ScaffoldState>();
+  final txtUserIdController = TextEditingController();
+  final txtEmailController = TextEditingController();
+  final txtPasswordController = TextEditingController();
   double screenHeight = 0;
   double screenWidth = 0;
   RxBool isPasswordVisible = false.obs;
@@ -25,11 +31,12 @@ class SignUpPageController extends GetxController{
   @override
   void dispose() {
     super.dispose();
-    userIdController.dispose();
-    passwordController.dispose();
+    txtUserIdController.dispose();
+    txtPasswordController.dispose();
+    txtEmailController.dispose();
   }
 
-  void initialization(){
+  void initialization() {
     screenHeight = MediaQuery.of(Get.context!).size.height;
     screenWidth = MediaQuery.of(Get.context!).size.width;
   }
@@ -41,29 +48,39 @@ class SignUpPageController extends GetxController{
   }
 
   Future<void> onTapSignUpBtn() async {
-    showToast("Sign Up");
-    // FocusScope.of(Get.context!).unfocus();
-    // String userName = userIdController.text.trim();
-    // String password = passwordController.text.trim().toString();
-    //
-    // if (!isNotNullEmptyString(userName)) {
-    //   showToast("Username is empty!");
-    // } else if (!isNotNullEmptyString(password)) {
-    //   showToast("Password is empty!");
-    // } else {
-    //   try {
-    //     await login(userName, password);
-    //   } catch (e) {
-    //     handleLoginError(e);
-    //   }
-    // }
+    String email = getEmptyString(txtEmailController.text.trim().toString());
+    String password =
+        getEmptyString(txtPasswordController.text.trim().toString());
+
+    if (password.length < 6) {
+      showToast("Password should be at least 6 characters");
+      return;
+    }
+    if (isNotNullEmptyString(email) && isNotNullEmptyString(password)) {
+      showLoadingDialog();
+      bool registrationResult =
+          await AuthController.instance.register(email, password);
+
+      if (registrationResult) {
+        hideDialog();
+        showToast(AppStrings.accCreatedSuccessfully);
+        Get.off(() => const MainNavigator());
+      } else {
+        hideDialog();
+        showToast(AppStrings.accCreationFailed);
+      }
+    } else {
+      showToast(AppStrings.plsEnterEmailAndPassword);
+    }
   }
 
   Future<void> loginWithGoogle() async {
     try {
-      final GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
+      showLoadingDialog();
+      final GoogleSignInAccount? googleSignInAccount =
+          await googleSignIn.signIn();
       final GoogleSignInAuthentication googleSignInAuthentication =
-      await googleSignInAccount!.authentication;
+          await googleSignInAccount!.authentication;
 
       final AuthCredential credential = GoogleAuthProvider.credential(
         accessToken: googleSignInAuthentication.accessToken,
@@ -78,16 +95,17 @@ class SignUpPageController extends GetxController{
 
       final User? currentUser = _auth.currentUser;
       assert(user?.uid == currentUser?.uid);
+      hideDialog();
 
-      Get.to(() => const HomeScreen());
+      Get.to(() => const MainNavigator());
     } catch (e) {
+      hideDialog();
       // Handle and display the error
       showToast("Error during Google sign-in: $e");
     }
   }
 
-  void onTapLoginText(){
+  void onTapLoginText() {
     Get.off(() => const LoginPage());
   }
-
 }

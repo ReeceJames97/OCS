@@ -6,9 +6,9 @@ import 'package:kf_ocs/controllers/keyboard_controller.dart';
 import 'package:kf_ocs/custom_views/custom_standard_button.dart';
 import 'package:kf_ocs/custom_views/keyboard_dimiss_view.dart';
 import 'package:kf_ocs/utils/app_colors.dart';
+import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
 import 'package:kf_ocs/utils/fontutils.dart';
-import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:lottie/lottie.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
@@ -28,9 +28,9 @@ class _SignUpPageState extends State<SignUpPage> {
   Widget build(BuildContext context) {
     return GetBuilder<SignUpPageController>(
         init: SignUpPageController(),
-        builder: (controller) => keyboardDismissView(
+        builder: (_) => keyboardDismissView(
               child: Scaffold(
-                key: controller.scaffoldKey,
+                key: controller.key,
                 // appBar: getAppbar(STRINGS.sign_up),
                 resizeToAvoidBottomInset: true,
                 body: buildBodyWidget(),
@@ -107,22 +107,66 @@ class _SignUpPageState extends State<SignUpPage> {
                       height: CustomScreenUtil().setHeight(30),
                     ),
 
-                    /// UserID Input
+                    // /// UserID Input
+                    // PhysicalModel(
+                    //   color: Colors.transparent,
+                    //   borderRadius: BorderRadius.circular(25),
+                    //   elevation: 5,
+                    //   child: TextField(
+                    //       controller: controller.txtUserIdController,
+                    //       decoration: InputDecoration(
+                    //           isDense: true,
+                    //           labelText: AppStrings.userName,
+                    //           labelStyle: TextStyle(
+                    //               color: AppColors.standardBtnColor,
+                    //               fontSize: CustomScreenUtil().setSp(bigFont())),
+                    //           fillColor: Colors.white70,
+                    //           contentPadding:
+                    //               EdgeInsets.all(CustomScreenUtil().setWidth(25)),
+                    //           border: OutlineInputBorder(
+                    //               borderSide:
+                    //                   const BorderSide(color: Colors.black),
+                    //               borderRadius: BorderRadius.circular(20)),
+                    //           enabledBorder: const OutlineInputBorder(
+                    //             borderRadius:
+                    //                 BorderRadius.all(Radius.circular(20.0)),
+                    //             borderSide: BorderSide(color: Colors.grey),
+                    //           ),
+                    //           focusedBorder: const OutlineInputBorder(
+                    //             borderRadius:
+                    //                 BorderRadius.all(Radius.circular(20.0)),
+                    //             borderSide: BorderSide(
+                    //                 color: AppColors.standardBtnColor),
+                    //           ),
+                    //           filled: true,
+                    //           floatingLabelBehavior: FloatingLabelBehavior.auto,
+                    //           prefixIcon: const Icon(Icons.person,
+                    //               color: AppColors.standardBtnColor)),
+                    //       style:
+                    //           TextStyle(fontSize: CustomScreenUtil().setSp(32))),
+                    // ),
+                    //
+                    // SizedBox(
+                    //   height: CustomScreenUtil().setHeight(20),
+                    // ),
+
+                    /// Email Input
                     PhysicalModel(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.circular(25),
                       elevation: 5,
                       child: TextField(
-                          controller: controller.userIdController,
+                          controller: controller.txtEmailController,
                           decoration: InputDecoration(
                               isDense: true,
-                              labelText: AppStrings.userName,
+                              labelText: AppStrings.email,
                               labelStyle: TextStyle(
                                   color: AppColors.standardBtnColor,
-                                  fontSize: CustomScreenUtil().setSp(bigFont())),
+                                  fontSize:
+                                      CustomScreenUtil().setSp(bigFont())),
                               fillColor: Colors.white70,
-                              contentPadding:
-                                  EdgeInsets.all(CustomScreenUtil().setWidth(25)),
+                              contentPadding: EdgeInsets.all(
+                                  CustomScreenUtil().setWidth(25)),
                               border: OutlineInputBorder(
                                   borderSide:
                                       const BorderSide(color: Colors.black),
@@ -140,14 +184,14 @@ class _SignUpPageState extends State<SignUpPage> {
                               ),
                               filled: true,
                               floatingLabelBehavior: FloatingLabelBehavior.auto,
-                              prefixIcon: const Icon(Icons.person,
+                              prefixIcon: const Icon(Icons.email,
                                   color: AppColors.standardBtnColor)),
-                          style:
-                              TextStyle(fontSize: CustomScreenUtil().setSp(32))),
+                          style: TextStyle(
+                              fontSize: CustomScreenUtil().setSp(32))),
                     ),
 
                     SizedBox(
-                      height: CustomScreenUtil().setHeight(40),
+                      height: CustomScreenUtil().setHeight(20),
                     ),
 
                     /// Password input
@@ -156,9 +200,10 @@ class _SignUpPageState extends State<SignUpPage> {
                           borderRadius: BorderRadius.circular(25),
                           elevation: 5,
                           child: TextField(
-                              controller: controller.passwordController,
+                              controller: controller.txtPasswordController,
                               keyboardType: TextInputType.text,
-                              obscureText: !(controller.isPasswordVisible.value),
+                              obscureText:
+                                  !(controller.isPasswordVisible.value),
                               decoration: InputDecoration(
                                   isDense: true,
                                   labelText: AppStrings.password,
@@ -204,7 +249,7 @@ class _SignUpPageState extends State<SignUpPage> {
                         )),
 
                     SizedBox(
-                      height: CustomScreenUtil().setHeight(30),
+                      height: CustomScreenUtil().setHeight(40),
                     ),
 
                     ///Sign Up btn
@@ -235,7 +280,8 @@ class _SignUpPageState extends State<SignUpPage> {
                             text: AppStrings.login,
                             style: TextStyle(
                                 decoration: TextDecoration.underline,
-                                fontSize: CustomScreenUtil().setWidth(biggerFont()),
+                                fontSize:
+                                    CustomScreenUtil().setWidth(biggerFont()),
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black
                                 // fontFamily: "NexaBold"
@@ -250,8 +296,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       AppStrings.or,
                       style: TextStyle(
-                        fontSize:
-                        CustomScreenUtil().setWidth(regularFont()),
+                        fontSize: CustomScreenUtil().setWidth(regularFont()),
                         fontWeight: FontWeight.bold,
                         // color: Colors.black
                         // fontFamily: "NexaBold"
@@ -265,11 +310,10 @@ class _SignUpPageState extends State<SignUpPage> {
                     Text(
                       AppStrings.signUpUsing,
                       style: TextStyle(
-                          fontSize:
-                          CustomScreenUtil().setWidth(regularFont()),
+                          fontSize: CustomScreenUtil().setWidth(regularFont()),
                           fontWeight: FontWeight.normal
-                        // fontFamily: "NexaBold"
-                      ),
+                          // fontFamily: "NexaBold"
+                          ),
                     ),
 
                     SizedBox(
@@ -277,11 +321,11 @@ class _SignUpPageState extends State<SignUpPage> {
                     ),
 
                     GestureDetector(
-                      onTap: (){
+                      onTap: () {
                         controller.loginWithGoogle();
                       },
                       child: const CircleAvatar(
-                        maxRadius: 26,
+                        maxRadius: 24,
                         backgroundColor: AppColors.backgroundColor,
                         backgroundImage: AssetImage('assets/images/google.png'),
                       ),

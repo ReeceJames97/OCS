@@ -9,3 +9,14 @@ bool isNotNullEmptyString(String? value) {
     return true;
   }
 }
+
+///Get blank if Text is Empty or Null
+String getEmptyString(String? value){
+  if (value != null &&
+      value.isNotEmpty &&
+      value.toLowerCase() != "null".toLowerCase() && value.trim().isNotEmpty) {
+    return value;
+  } else {
+    return "";
+  }
+}
