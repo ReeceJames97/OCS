@@ -10,12 +10,14 @@ void showSnackBar(String? message, {String? title}) {
     Get.snackbar(
       title ?? "",
       message!,
-      messageText: Text(
-        message,
-        style: TextStyle(
-            fontSize: CustomScreenUtil().setSp(regularFont()),
-            color: Colors.white,
-            fontWeight: FontWeight.normal),
+      messageText: Center(
+        child: Text(
+          message,
+          style: TextStyle(
+              fontSize: CustomScreenUtil().setSp(regularFont()),
+              color: Colors.white,
+              fontWeight: FontWeight.normal),
+        ),
       ),
       colorText: Colors.white,
       snackPosition: SnackPosition.BOTTOM,
@@ -26,7 +28,7 @@ void showSnackBar(String? message, {String? title}) {
       dismissDirection: DismissDirection.horizontal,
       borderRadius: 5,
       snackStyle: SnackStyle.FLOATING,
-      maxWidth: double.infinity,
+      maxWidth: double.maxFinite,
     );
   }
 }

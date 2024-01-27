@@ -32,24 +32,6 @@ class _TodayScreenState extends State<TodayScreen> {
                     fontWeight: FontWeight.bold),
                 backgroundColor: AppColors.appBarColor,
                 iconTheme: const IconThemeData(color: Colors.white),
-                leading: IconButton(
-                  icon: ValueListenableBuilder<AdvancedDrawerValue>(
-                    valueListenable: controller.advancedDrawer,
-                    builder: (_, value, __) {
-                      return AnimatedSwitcher(
-                        duration: const Duration(milliseconds: 250),
-                        child: Icon(
-                          value.visible ? Icons.clear : Icons.menu,
-                          key: ValueKey<bool>(value.visible),
-                        ),
-                      );
-                    },
-                  ),
-                  onPressed: () {
-                    controller.drawerControl();
-                  },
-                  // icon: const Icon(Icons.menu),
-                ),
               ),
               resizeToAvoidBottomInset: true,
               body: buildBodyWidget(),

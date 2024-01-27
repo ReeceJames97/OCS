@@ -1,25 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/main_navigator_controller.dart';
+import 'package:kf_ocs/controllers/profile_page_controller.dart';
 import 'package:kf_ocs/controllers/setting_page_controller.dart';
 import 'package:kf_ocs/ui/nav_bar.dart';
 import 'package:kf_ocs/utils/app_colors.dart';
 
-class SettingPage extends StatefulWidget {
-  const SettingPage({super.key});
+class ProfilePage extends StatefulWidget {
+  const ProfilePage({super.key});
 
   @override
-  State<SettingPage> createState() => _SettingPageState();
+  State<ProfilePage> createState() => _ProfilePageState();
 }
 
-class _SettingPageState extends State<SettingPage> {
+class _ProfilePageState extends State<ProfilePage> {
 
   // final MainNavigatorController navController = Get.find();
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<SettingPageController>(
-      init: SettingPageController(),
+    return GetBuilder<ProfilePageController>(
+      init: ProfilePageController(),
         builder: (controller) => Scaffold(
             // appBar: AppBar(
             //   title: const Text("Setting"),
@@ -43,7 +44,7 @@ class _SettingPageState extends State<SettingPage> {
           body: Container(
             margin: const EdgeInsets.all(20),
             child: const Center(
-              child: Text("Setting"),
+              child: Text("Profile"),
             ),
           )
         ));
