@@ -5,9 +5,11 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_ocs/controllers/authorization/auth_controller.dart';
 import 'package:kf_ocs/ui/authorization/login_page.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
+import 'package:kf_ocs/utils/constants.dart';
 import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/toast.dart';
 import 'package:kf_ocs/utils/utils.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../main_navigator.dart';
 
@@ -21,6 +23,7 @@ class SignUpPageController extends GetxController {
   RxBool isPasswordVisible = false.obs;
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final GoogleSignIn googleSignIn = GoogleSignIn();
+  late SharedPreferences? prefs;
 
   @override
   void onInit() {
@@ -36,9 +39,10 @@ class SignUpPageController extends GetxController {
     txtEmailController.dispose();
   }
 
-  void initialization() {
+  Future<void> initialization() async{
     screenHeight = MediaQuery.of(Get.context!).size.height;
     screenWidth = MediaQuery.of(Get.context!).size.width;
+    prefs = await SharedPreferences.getInstance();
   }
 
   ///Update isPasswordVisible
@@ -62,6 +66,8 @@ class SignUpPageController extends GetxController {
           await AuthController.instance.register(email, password);
 
       if (registrationResult) {
+        prefs?.setString(Constants.USER_EMAIL, email);
+        update();
         hideDialog();
         showToast(AppStrings.accCreatedSuccessfully);
         Get.off(() => const MainNavigator());

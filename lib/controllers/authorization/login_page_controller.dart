@@ -5,6 +5,7 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:kf_ocs/controllers/authorization/auth_controller.dart';
 import 'package:kf_ocs/ui/authorization/sign_up_page.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
+import 'package:kf_ocs/utils/constants.dart';
 import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/toast.dart';
 import 'package:kf_ocs/utils/utils.dart';
@@ -39,11 +40,21 @@ class LoginPageController extends GetxController {
     txtEmailController.dispose();
   }
 
-  void initialization() {
+  Future<void> initialization() async{
     screenHeight = MediaQuery.of(Get.context!).size.height;
     screenWidth = MediaQuery.of(Get.context!).size.width;
+    prefs = await SharedPreferences.getInstance();
     // isKeyboardVisible = KeyboardVisibilityProvider.isKeyboardVisible(Get.context!);
     // logD(isKeyboardVisible.toString());
+  }
+
+  void loginWithUserNameAndPassword(){
+    String email = getEmptyString(txtEmailController.text.trim().toString());
+    String password = getEmptyString(txtPasswordController.text.trim().toString());
+
+    if (isNotNullEmptyString(email) && isNotNullEmptyString(password)) {
+
+    }
   }
 
   Future<void> onTapLoginBtn() async {
@@ -56,6 +67,8 @@ class LoginPageController extends GetxController {
       bool loginResult = await AuthController.instance.login(email, password);
 
       if (loginResult) {
+        prefs?.setString(Constants.USER_EMAIL, email);
+        update();
         hideDialog();
         showToast(AppStrings.loginSuccessfully);
         Get.off(() => const MainNavigator());

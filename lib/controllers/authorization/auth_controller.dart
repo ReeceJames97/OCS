@@ -97,6 +97,7 @@ class AuthController extends GetxController {
       return true;
     } catch (e) {
       // hideDialog();
+      logD("EE$e");
       return false;
     }
   }

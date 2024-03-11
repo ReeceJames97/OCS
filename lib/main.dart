@@ -9,6 +9,7 @@ import 'package:kf_ocs/ui/splash_screen.dart';
 import 'package:kf_ocs/utils/app_colors.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/screen_unit.dart';
+import 'package:month_year_picker/month_year_picker.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -42,6 +43,9 @@ class MyApp extends StatelessWidget {
             ),
             // home: const KeyboardVisibilityProvider(child: SplashScreen())
             home: const SplashScreen(),
+            localizationsDelegates: const [
+              MonthYearPickerLocalizations.delegate
+            ],
           );
         });
   }

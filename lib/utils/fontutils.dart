@@ -14,3 +14,7 @@ int biggerFont(){
   return 32;
 }
 
+int biggestFont(){
+  return 36;
+}
+

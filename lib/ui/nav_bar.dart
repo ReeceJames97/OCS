@@ -9,6 +9,7 @@ import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
 import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/fontutils.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class NavBar extends StatefulWidget {
   const NavBar({super.key});
@@ -122,7 +123,7 @@ class _NavBarState extends State<NavBar> {
                   controller.key.currentState?.closeDrawer();
                   controller.update();
                 },
-                leading: const Icon(Icons.checklist_rtl),
+                leading:  Icon(MdiIcons.calendarCheck),
                 title: const Text('CheckIn'),
               ),
               ListTile(
@@ -131,7 +132,7 @@ class _NavBarState extends State<NavBar> {
                   controller.key.currentState?.closeDrawer();
                   controller.update();
                 },
-                leading: const Icon(Icons.account_circle_rounded),
+                leading: Icon(MdiIcons.accountCircle),
                 title: const Text('Profile'),
               ),
               ListTile(

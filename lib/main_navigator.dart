@@ -19,6 +19,7 @@ class MainNavigator extends StatefulWidget {
   State<MainNavigator> createState() => _MainNavigatorState();
 }
 
+
 class _MainNavigatorState extends State<MainNavigator> {
   final MainNavigatorController controller = Get.put(MainNavigatorController());
   var crrTime = DateTime.now();
@@ -47,169 +48,6 @@ class _MainNavigatorState extends State<MainNavigator> {
       ),
     );
   }
-
-  // Widget buildDrawerView() {
-  //   return Drawer(
-  //       elevation: 5,
-  //       child: ListView(
-  //           shrinkWrap: true,
-  //           primary: false,
-  //           padding: EdgeInsets.zero,
-  //           children: [
-  //             DrawerHeader(
-  //               decoration: const BoxDecoration(
-  //                 color: AppColors.appBarColor,
-  //               ),
-  //               child: Center(
-  //                 child: Column(
-  //                   children: [
-  //                     Expanded(
-  //                       flex: 4,
-  //                       child: (controller.photoUrl.isNotEmpty)
-  //                           ? CircleAvatar(
-  //                           backgroundColor: AppColors.appBarColor,
-  //                           radius: 37,
-  //                           child: CircleAvatar(
-  //                               maxRadius: 35,
-  //                               backgroundImage:
-  //                               NetworkImage(controller.photoUrl)))
-  //                           : CircleAvatar(
-  //                         backgroundColor: AppColors.appBarColor,
-  //                         radius: 37,
-  //                         child: CircleAvatar(
-  //                           maxRadius: 35,
-  //                           backgroundColor: AppColors.standardBtnColor,
-  //                           child: SvgPicture.asset(
-  //                             'assets/images/profile.svg',
-  //                             width: 80,
-  //                             height: 80,
-  //                           ),
-  //                         ),
-  //                       ),
-  //                     ),
-  //
-  //                     ///Name
-  //                     (controller.userName.isNotEmpty)
-  //                         ? Expanded(
-  //                       flex: 1,
-  //                       child: Text(
-  //                         controller.userName.toString(),
-  //                         style: TextStyle(
-  //                             fontSize:
-  //                             CustomScreenUtil().setSp(regularFont()),
-  //                             color: AppColors.backgroundColor,
-  //                             fontWeight: FontWeight.bold
-  //                           // fontFamily: "NexaBold"
-  //                         ),
-  //                       ),
-  //                     )
-  //                         : Text(
-  //                       AppStrings.name,
-  //                       style: TextStyle(
-  //                           fontSize:
-  //                           CustomScreenUtil().setSp(regularFont()),
-  //                           color: AppColors.backgroundColor,
-  //                           fontWeight: FontWeight.bold
-  //                         // fontFamily: "NexaBold"
-  //                       ),
-  //                     ),
-  //
-  //                     ///Email
-  //                     (controller.userMail.isNotEmpty)
-  //                         ? Expanded(
-  //                       flex: 1,
-  //                       child: Text(
-  //                         controller.userMail.toString(),
-  //                         style: TextStyle(
-  //                             fontSize:
-  //                             CustomScreenUtil().setSp(regularFont()),
-  //                             color: AppColors.backgroundColor,
-  //                             fontWeight: FontWeight.bold
-  //                           // fontFamily: "NexaBold"
-  //                         ),
-  //                       ),
-  //                     )
-  //                         : Text(
-  //                       AppStrings.email,
-  //                       style: TextStyle(
-  //                           fontSize:
-  //                           CustomScreenUtil().setSp(regularFont()),
-  //                           color: AppColors.backgroundColor,
-  //                           fontWeight: FontWeight.bold
-  //                         // fontFamily: "NexaBold"
-  //                       ),
-  //                     ),
-  //                   ],
-  //                 ),
-  //               ),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 controller.appBarTitle = "CheckIn";
-  //                 controller.key.currentState?.closeDrawer();
-  //                 controller.update();
-  //               },
-  //               leading: const Icon(Icons.checklist_rtl),
-  //               title: const Text('CheckIn'),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 controller.appBarTitle = "Profile";
-  //                 controller.key.currentState?.closeDrawer();
-  //                 controller.update();
-  //               },
-  //               leading: const Icon(Icons.account_circle_rounded),
-  //               title: const Text('Profile'),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 controller.appBarTitle = "Users";
-  //                 controller.key.currentState?.closeDrawer();
-  //                 controller.update();
-  //               },
-  //               leading: const Icon(Icons.people),
-  //               title: const Text('Users'),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 controller.appBarTitle = "AttendanceHistory";
-  //                 controller.key.currentState?.closeDrawer();
-  //                 controller.update();
-  //               },
-  //               leading: const Icon(Icons.history),
-  //               title: const Text('Attendance History'),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 controller.appBarTitle = "Settings";
-  //                 controller.key.currentState?.closeDrawer();
-  //                 controller.update();
-  //               },
-  //               leading: const Icon(Icons.settings),
-  //               title: const Text('Settings'),
-  //             ),
-  //             SizedBox(
-  //               height: CustomScreenUtil().setHeight(20),
-  //             ),
-  //             const Divider(
-  //               color: Colors.black,
-  //               height: 1,
-  //               thickness: 1.0,
-  //               indent: 20.0,
-  //               endIndent: 10.0,
-  //             ),
-  //             SizedBox(
-  //               height: CustomScreenUtil().setHeight(10),
-  //             ),
-  //             ListTile(
-  //               onTap: () {
-  //                 showConfirmDialog(controller.confirmLogout);
-  //               },
-  //               leading: const Icon(Icons.logout),
-  //               title: const Text(AppStrings.logout),
-  //             ),
-  //           ]));
-  // }
 
   Future<bool> onWillPop() async {
     DateTime now = DateTime.now();
@@ -248,7 +86,7 @@ class _MainNavigatorState extends State<MainNavigator> {
           return const UsersPage();
 
         case "AttendanceHistory":
-          controller.appBarTitle = "AttendanceHistory".obs;
+          controller.appBarTitle = "Attendance History".obs;
           return const AttendanceHistoryPage();
 
         case "Settings":
