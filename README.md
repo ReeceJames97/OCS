@@ -1,4 +1,4 @@
-# kf_ocs(Office Check-In System)
+# OCS(Office Check-In System)
 
 A new Flutter project.
 
