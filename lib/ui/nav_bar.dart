@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:kf_ocs/controllers/main_navigator_controller.dart';
-import 'package:kf_ocs/ui/home_screen.dart';
-import 'package:kf_ocs/ui/setting_page.dart';
 import 'package:kf_ocs/utils/app_colors.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
@@ -11,15 +9,10 @@ import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/fontutils.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
-class NavBar extends StatefulWidget {
-  const NavBar({super.key});
+class NavBar extends StatelessWidget {
+  NavBar({super.key});
 
-  @override
-  State<NavBar> createState() => _NavBarState();
-}
-
-class _NavBarState extends State<NavBar> {
-  final MainNavigatorController controller = Get.find();
+  final MainNavigatorController _controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -39,14 +32,14 @@ class _NavBarState extends State<NavBar> {
                     children: [
                       Expanded(
                         flex: 4,
-                        child: (controller.photoUrl.isNotEmpty)
+                        child: (_controller.photoUrl.isNotEmpty)
                             ? CircleAvatar(
                             backgroundColor: AppColors.appBarColor,
                             radius: 37,
                             child: CircleAvatar(
                                 maxRadius: 35,
                                 backgroundImage:
-                                NetworkImage(controller.photoUrl)))
+                                NetworkImage(_controller.photoUrl)))
                             : CircleAvatar(
                           backgroundColor: AppColors.appBarColor,
                           radius: 37,
@@ -63,11 +56,11 @@ class _NavBarState extends State<NavBar> {
                       ),
 
                       ///Name
-                      (controller.userName.isNotEmpty)
+                      (_controller.userName.isNotEmpty)
                           ? Expanded(
                         flex: 1,
                         child: Text(
-                          controller.userName.toString(),
+                          _controller.userName.toString(),
                           style: TextStyle(
                               fontSize:
                               CustomScreenUtil().setSp(regularFont()),
@@ -89,11 +82,11 @@ class _NavBarState extends State<NavBar> {
                       ),
 
                       ///Email
-                      (controller.userMail.isNotEmpty)
+                      (_controller.userMail.isNotEmpty)
                           ? Expanded(
                         flex: 1,
                         child: Text(
-                          controller.userMail.toString(),
+                          _controller.userMail.toString(),
                           style: TextStyle(
                               fontSize:
                               CustomScreenUtil().setSp(regularFont()),
@@ -119,45 +112,45 @@ class _NavBarState extends State<NavBar> {
               ),
               ListTile(
                 onTap: () {
-                  controller.appBarTitle = "CheckIn".obs;
-                  controller.key.currentState?.closeDrawer();
-                  controller.update();
+                  _controller.appBarTitle = "CheckIn".obs;
+                  _controller.key.currentState?.closeDrawer();
+                  _controller.update();
                 },
                 leading:  Icon(MdiIcons.calendarCheck),
                 title: const Text('CheckIn'),
               ),
               ListTile(
                 onTap: () {
-                  controller.appBarTitle = "Profile".obs;
-                  controller.key.currentState?.closeDrawer();
-                  controller.update();
+                  _controller.appBarTitle = "Profile".obs;
+                  _controller.key.currentState?.closeDrawer();
+                  _controller.update();
                 },
                 leading: Icon(MdiIcons.accountCircle),
                 title: const Text('Profile'),
               ),
               ListTile(
                 onTap: () {
-                  controller.appBarTitle = "Users".obs;
-                  controller.key.currentState?.closeDrawer();
-                  controller.update();
+                  _controller.appBarTitle = "Users".obs;
+                  _controller.key.currentState?.closeDrawer();
+                  _controller.update();
                 },
                 leading: const Icon(Icons.people),
                 title: const Text('Users'),
               ),
               ListTile(
                 onTap: () {
-                  controller.appBarTitle = "AttendanceHistory".obs;
-                  controller.key.currentState?.closeDrawer();
-                  controller.update();
+                  _controller.appBarTitle = "AttendanceHistory".obs;
+                  _controller.key.currentState?.closeDrawer();
+                  _controller.update();
                 },
                 leading: const Icon(Icons.history),
                 title: const Text('Attendance History'),
               ),
               ListTile(
                 onTap: () {
-                  controller.appBarTitle = "Settings".obs;
-                  controller.key.currentState?.closeDrawer();
-                  controller.update();
+                  _controller.appBarTitle = "Settings".obs;
+                  _controller.key.currentState?.closeDrawer();
+                  _controller.update();
                 },
                 leading: const Icon(Icons.settings),
                 title: const Text('Settings'),
@@ -177,7 +170,7 @@ class _NavBarState extends State<NavBar> {
               ),
               ListTile(
                 onTap: () {
-                  showConfirmDialog(controller.confirmLogout);
+                  showConfirmDialog(_controller.confirmLogout);
                 },
                 leading: const Icon(Icons.logout),
                 title: const Text(AppStrings.logout),

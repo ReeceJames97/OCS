@@ -1,22 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kf_ocs/controllers/main_navigator_controller.dart';
-import 'package:kf_ocs/controllers/profile_page_controller.dart';
-import 'package:kf_ocs/controllers/setting_page_controller.dart';
 import 'package:kf_ocs/controllers/users_page_controller.dart';
-import 'package:kf_ocs/ui/nav_bar.dart';
-import 'package:kf_ocs/utils/app_colors.dart';
 
-class UsersPage extends StatefulWidget {
+class UsersPage extends StatelessWidget {
   const UsersPage({super.key});
-
-  @override
-  State<UsersPage> createState() => _UsersPageState();
-}
-
-class _UsersPageState extends State<UsersPage> {
-
-  // final MainNavigatorController navController = Get.find();
 
   @override
   Widget build(BuildContext context) {

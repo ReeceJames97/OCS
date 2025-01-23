@@ -26,8 +26,15 @@ class _MainNavigatorState extends State<MainNavigator> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: onWillPop,
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (bool didPop) async {
+        if (didPop) return;
+        final bool shouldPop = await onWillPop();
+        if (shouldPop) {
+          Navigator.pop(context);
+        }
+      },
       child: GetBuilder<MainNavigatorController>(
         init: MainNavigatorController(),
         builder: (_) => Scaffold(
@@ -41,7 +48,7 @@ class _MainNavigatorState extends State<MainNavigator> {
             iconTheme: const IconThemeData(color: Colors.white),
           ),
           // drawer:  buildDrawerView(),
-          drawer: const NavBar(),
+          drawer: NavBar(),
           body: buildBodyView(controller.appBarTitle.value),
           resizeToAvoidBottomInset: true,
         ),

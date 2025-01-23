@@ -66,7 +66,7 @@ class SignUpPageController extends GetxController {
           await AuthController.instance.register(email, password);
 
       if (registrationResult) {
-        prefs?.setString(Constants.USER_EMAIL, email);
+        prefs?.setString(Constants.userEmail, email);
         update();
         hideDialog();
         showToast(AppStrings.accCreatedSuccessfully);

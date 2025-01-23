@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
@@ -36,7 +35,7 @@ Widget getEmptyView({String? message, String? title, bool isAnimate = false}) {
             height: CustomScreenUtil().setWidth(40),
           ),
           Text(
-            (title != null && title.isNotEmpty) ? title : AppStrings.empty_data,
+            (title != null && title.isNotEmpty) ? title : AppStrings.emptyData,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: CustomScreenUtil().setSp(40),
@@ -48,7 +47,7 @@ Widget getEmptyView({String? message, String? title, bool isAnimate = false}) {
             height: CustomScreenUtil().setWidth(40),
           ),
           Text(
-            (message == null || message == "") ? AppStrings.nothing_to_show : message,
+            message ?? AppStrings.nothingToShow,
             textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: CustomScreenUtil().setSp(28),

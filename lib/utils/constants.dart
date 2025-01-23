@@ -1,7 +1,6 @@
-
 class Constants{
-  static const String USER_NAME = "user_name";
-  static const String USER_EMAIL = "user_email";
-  static const String PASS_WORD = "password";
-  static const String USER_ID = "user_id";
+  static const String userName = "userName";
+  static const String userEmail = "userEmail";
+  static const String password = "password";
+  static const String userId = "userId";
 }

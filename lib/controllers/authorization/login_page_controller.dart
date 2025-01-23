@@ -67,7 +67,7 @@ class LoginPageController extends GetxController {
       bool loginResult = await AuthController.instance.login(email, password);
 
       if (loginResult) {
-        prefs?.setString(Constants.USER_EMAIL, email);
+        prefs?.setString(Constants.userEmail, email);
         update();
         hideDialog();
         showToast(AppStrings.loginSuccessfully);
@@ -126,7 +126,7 @@ class LoginPageController extends GetxController {
   void handleLoginError(dynamic error) {
     String errorMessage = "Error occurred!";
     if (error.toString().toLowerCase() ==
-        "rangeerror (index): invalid value: valid value range is empty: 0"
+        "range error (index): invalid value: valid value range is empty: 0"
             .toLowerCase()) {
       errorMessage = AppStrings.employeeDoesNotExist;
     }

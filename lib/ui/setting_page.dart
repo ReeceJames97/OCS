@@ -1,20 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kf_ocs/controllers/main_navigator_controller.dart';
 import 'package:kf_ocs/controllers/setting_page_controller.dart';
-import 'package:kf_ocs/ui/nav_bar.dart';
-import 'package:kf_ocs/utils/app_colors.dart';
 
-class SettingPage extends StatefulWidget {
+class SettingPage extends StatelessWidget {
   const SettingPage({super.key});
-
-  @override
-  State<SettingPage> createState() => _SettingPageState();
-}
-
-class _SettingPageState extends State<SettingPage> {
-
-  // final MainNavigatorController navController = Get.find();
 
   @override
   Widget build(BuildContext context) {

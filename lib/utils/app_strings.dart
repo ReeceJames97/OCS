@@ -38,6 +38,6 @@ class AppStrings {
   static const String accCreatedSuccessfully = "Account created successfully!";
   static const String today = "Today";
   static const String welcome = "Welcome";
-  static const String empty_data = "Empty Data!";
-  static const String nothing_to_show = "There are nothing to show you!";
+  static const String emptyData = "No data found!";
+  static const String nothingToShow = "Nothing to show!";
 }

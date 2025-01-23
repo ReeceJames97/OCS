@@ -1,18 +1,13 @@
 import 'dart:async';
-import 'dart:math';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:get/get.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_ocs/models/users_model.dart';
-import 'package:kf_ocs/ui/authorization/login_page.dart';
 import 'package:kf_ocs/utils/constants.dart';
-import 'package:kf_ocs/utils/dialog.dart';
 import 'package:kf_ocs/utils/log_utils.dart';
 import 'package:kf_ocs/utils/share_preference_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -32,23 +27,12 @@ class CheckInPageController extends GetxController {
   RxString checkIn = "--/--".obs;
   RxString checkOut = "--/--".obs;
 
-  @override
-  void onInit() {
-    super.onInit();
-    initialization();
-  }
-
-  @override
-  void dispose() {
-    super.dispose();
-  }
-
   void initialization() async{
     screenHeight = MediaQuery.of(Get.context!).size.height;
     screenWidth = MediaQuery.of(Get.context!).size.width;
     prefs = await SharedPreferences.getInstance();
 
-    email = SharePreferenceUtils().getString(prefs?.getString(Constants.USER_EMAIL)).obs;
+    email = SharePreferenceUtils().getString(prefs?.getString(Constants.userEmail)).obs;
     todayDate.value = DateFormat("dd/MMM/yyyy").format(DateTime.now()).toString();
     // today = DateTime.now().day.toString().obs;
     if (user != null) {

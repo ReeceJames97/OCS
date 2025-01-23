@@ -42,9 +42,9 @@ class MainNavigatorController extends GetxController {
     }
 
     String uid = FirebaseAuth.instance.currentUser!.uid;
-    prefs?.setString(Constants.USER_ID, uid);
-    UsersModel.userEmail = prefs?.getString(Constants.USER_EMAIL) ?? "";
-    UsersModel.userId = prefs?.getString(Constants.USER_ID) ?? "";
+    prefs?.setString(Constants.userId, uid);
+    UsersModel.userEmail = prefs?.getString(Constants.userEmail) ?? "";
+    UsersModel.userId = prefs?.getString(Constants.userId) ?? "";
 
     startLocService();
   }

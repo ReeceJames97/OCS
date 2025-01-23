@@ -1,4 +1,3 @@
-import 'package:kf_ocs/utils/log_utils.dart';
 import 'package:location/location.dart';
 
 class LocationService{

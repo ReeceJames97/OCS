@@ -1,16 +1,10 @@
-import 'dart:async';
-import 'dart:math';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:kf_ocs/controllers/check_in_page_controller.dart';
-import 'package:kf_ocs/models/users_model.dart';
 import 'package:kf_ocs/utils/app_strings.dart';
 import 'package:kf_ocs/utils/custom_screenutil.dart';
 import 'package:kf_ocs/utils/fontutils.dart';
-import 'package:kf_ocs/utils/log_utils.dart';
 import 'package:lottie/lottie.dart';
 import 'package:slide_to_act/slide_to_act.dart';
 
@@ -248,6 +242,7 @@ class _CheckInPageState extends State<CheckInPage> {
                             color: Colors.black54
                         ),
                       )),
+
 
               controller.location != "" ? Text(
                 "Location : ${controller.location}",
